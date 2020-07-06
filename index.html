@@ -1,0 +1,19 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>郵便番号検索</title>
+    <link href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <script src="./src/App.js" type="module" defer></script>
+  </head>
+  <body>
+    <h1>郵便番号検索</h1>
+      <div id="main">
+        <form name="zipCodeForm "id="zipCodeForm">
+          郵便番号: <input type="text" id="zipCode" maxlength="7" autofocus>
+          <input type="submit" value="検索">
+        </form>
+        <p id="address"></p>
+      </div>
+  </body>
+</html>
