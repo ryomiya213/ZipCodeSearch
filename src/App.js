@@ -1,9 +1,9 @@
 'use strict';
 
 async function App() {
-  const zipCodeJSON = await fetch('./src/zipCode.json');
+  const zipCodeJSON = await fetch('https://ryomiya213.github.io/ZipCodeSearch/src/zipCode.json');
   const zipCodeData = await zipCodeJSON.json();
-  console.log(zipCodeData[1].zipCode);
+
   const zipCodeForm = document.querySelector('#zipCodeForm');
   const zipCodeInputElement = document.querySelector('#zipCode');
   const addressElement = document.querySelector('#address');
