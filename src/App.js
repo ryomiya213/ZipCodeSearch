@@ -10,14 +10,25 @@ async function App() {
 
   zipCodeForm.addEventListener(('submit'), (event) => {
     event.preventDefault();
+    addressElement.innerHTML = '';
     const zipCode = zipCodeInputElement.value;
     if (/\d{7}/.test(zipCode)) {
-      addressElement.innerHTML = "みつかりませんでした"
+      const addressList = [];
+      //addressElement.innerHTML = "みつかりませんでした"
       zipCodeData.forEach(value => {
         if (value.zipCode === zipCode) {
-          addressElement.innerHTML = `住所: ${value.Prefecture} ${value.City} ${value.Street}`
+          addressList.push(`住所: ${value.Prefecture} ${value.City} ${value.Street}`);
+          //addressElement.innerHTML = `住所: ${value.Prefecture} ${value.City} ${value.Street}`
         }
       });
+      if (addressList.length === 0) {
+        addressElement.innerHTML = "みつかりませんでした"
+      } else {
+        addressList.forEach(address => {
+          addressElement.innerHTML += address + '<br>';
+        });
+      }
+
     } else {
       addressElement.innerHTML = "7桁の数字で入力してください"
     }
