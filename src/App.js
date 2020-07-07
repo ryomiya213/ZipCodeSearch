@@ -14,11 +14,9 @@ async function App() {
     const zipCode = zipCodeInputElement.value;
     if (/\d{7}/.test(zipCode)) {
       const addressList = [];
-      //addressElement.innerHTML = "みつかりませんでした"
       zipCodeData.forEach(value => {
         if (value.zipCode === zipCode) {
           addressList.push(`住所: ${value.Prefecture} ${value.City} ${value.Street}`);
-          //addressElement.innerHTML = `住所: ${value.Prefecture} ${value.City} ${value.Street}`
         }
       });
       if (addressList.length === 0) {
