@@ -14,16 +14,34 @@ async function App() {
     const zipCode = zipCodeInputElement.value;
     if (/\d{7}/.test(zipCode)) {
       const addressList = [];
-      zipCodeData.forEach(value => {
-        if (value.zipCode === zipCode) {
-          addressList.push(`住所: ${value.Prefecture} ${value.City} ${value.Street}`);
+      zipCodeData.forEach(address => {
+        if (address.zipCode === zipCode) {
+          addressList.push(address);
         }
       });
       if (addressList.length === 0) {
         addressElement.innerHTML = "みつかりませんでした"
       } else {
         addressList.forEach(address => {
-          addressElement.innerHTML += address + '<br>';
+          switch (true) {
+            case address.Street.endsWith('以下に掲載がない場合'):
+              addressElement.innerHTML += `住所: ${address.Prefecture} ${address.City} 以下に掲載がない地域` + '<br>';
+              zipCodeData.forEach(masterData => {
+                if (address.City === masterData.City && address.zipCode !== masterData.zipCode) {
+                  addressElement.innerHTML += ` ${masterData.Street}`;
+                }
+              });
+              addressElement.innerHTML += '<br>';
+              break;
+            case address.Street.endsWith('の次に番地がくる場合'):
+              addressElement.innerHTML += `住所: ${address.Prefecture} ${address.City} 次に番地がくる地域` + '<br>';
+              break;
+            case address.Street.endsWith('一円'):
+              addressElement.innerHTML += `住所: ${address.Prefecture} ${address.City}` + '<br>';
+              break;
+            default:
+              addressElement.innerHTML += `住所: ${address.Prefecture} ${address.City} ${address.Street}` + '<br>';
+          }
         });
       }
 
